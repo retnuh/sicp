@@ -12,3 +12,10 @@
   (if (integer? n)
     (fib-tail n)
     `(fib-tail ~n)))
+
+(defn next-fib [[a b]] [b (+ a b)])
+
+(defn steve-fib [n]
+  (map first (take n (iterate next-fib [0 1]))))
+
+(def fib-seq (lazy-cat [0 1] (map + (rest fib-seq) fib-seq)))
